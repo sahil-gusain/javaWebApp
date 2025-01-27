@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.bean.Customer;
+
 @WebServlet("/FirstServlet")
 public class FirstServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -28,21 +30,27 @@ public class FirstServlet extends HttpServlet {
         
         
         
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String dob = request.getParameter("dob");
-        String city = request.getParameter("city");
-        String country = request.getParameter("country");
-        String gender = request.getParameter("gender");
-
-        // Print parameters to console
-        System.out.println("Firstname: " + firstname);
-        System.out.println("Lastname: " + lastname);
-        System.out.println("DOB: " + dob);
-        System.out.println("City: " + city);
-        System.out.println("Country: " + country);
-        System.out.println("Gender: " + gender);
-
+       
+        
+        Customer newcust = new Customer();
+        
+        newcust.setFirstname(request.getParameter("firstname"));
+        newcust.setLastname(request.getParameter("lastname"));
+        newcust.setDob(request.getParameter("dob"));
+        newcust.setCountry(request.getParameter("country"));
+        newcust.setCity(request.getParameter("city"));
+        newcust.setGender(request.getParameter("gender"));
+        
+        
+        String firstname = newcust.getFirstname();
+        String lastname = newcust.getLastname();
+        String dob = newcust.getDob();
+        String city = newcust.getCity();
+        String country = newcust.getCountry();
+        String gender = newcust.getGender();
+        
+        System.out.println(firstname + " "+ lastname+ " "+ dob + " "+city+" "+country+" "+" "+gender);
+        
         pw.close();
     }
 }
