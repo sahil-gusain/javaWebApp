@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.bean.Customer;
+import com.dao.CustomerDao;
 
 @WebServlet("/FirstServlet")
 public class FirstServlet extends HttpServlet {
@@ -41,15 +42,12 @@ public class FirstServlet extends HttpServlet {
         newcust.setCity(request.getParameter("city"));
         newcust.setGender(request.getParameter("gender"));
         
+        CustomerDao dao =new CustomerDao();
+        System.out.println(dao.insertIntoDB(newcust));
         
-        String firstname = newcust.getFirstname();
-        String lastname = newcust.getLastname();
-        String dob = newcust.getDob();
-        String city = newcust.getCity();
-        String country = newcust.getCountry();
-        String gender = newcust.getGender();
         
-        System.out.println(firstname + " "+ lastname+ " "+ dob + " "+city+" "+country+" "+" "+gender);
+        
+        
         
         pw.close();
     }
