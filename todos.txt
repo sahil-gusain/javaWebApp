@@ -1,0 +1,5 @@
+Todos for today 
+
+#finish the search demo as much as possible
+
+#finish the update and delete 
