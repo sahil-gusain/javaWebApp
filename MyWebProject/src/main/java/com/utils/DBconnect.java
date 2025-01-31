@@ -9,7 +9,7 @@ public class DBconnect {
     static String username = "root";
     static String password = "root";
 
-    public static Connection findConnection() {
+    public static  Connection findConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
