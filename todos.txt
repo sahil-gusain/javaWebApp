@@ -1,1 +1,0 @@
-throw whenever we use throw exception it means that try catch of it should be done where ever its object is created of it is used instead of writing the exception that place
