@@ -1,4 +1,16 @@
 .outer-div {
-	height: 100px;
-	background-color: coral;
+	height: 500px;
+	width: 550px;
+	background-color: #5DE2E7;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right:-69;
+    
+   
+	margin: auto;
+	display:flex;
+	justify-content: center;
+	
 }
