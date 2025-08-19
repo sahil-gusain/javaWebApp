@@ -50,6 +50,8 @@ public class bootstrap implements CommandLineRunner{
         
         saveSahil.getBooks().add(saveEJB);
         
+        saveEJB.setPublisher(savePenguin);
+        
         authorRepository.save(saveSahil);
         bookRepository.save(saveEJB);
         publisherRepository.save(savePenguin);

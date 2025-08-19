@@ -1,11 +1,14 @@
 package com.example.demo.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Publisher {
@@ -18,6 +21,17 @@ public class Publisher {
 	private String City;
 	private String State;
 	private Integer Zipcode;
+	
+	@OneToMany
+	private Set<Book> books = new HashSet<Book>();
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
 
 	public long getID() {
 		return ID;
