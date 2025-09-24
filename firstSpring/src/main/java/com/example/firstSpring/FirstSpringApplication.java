@@ -10,13 +10,14 @@ import com.example.firstSpring.controller.MyController;
 public class FirstSpringApplication {
 
 	public static void main(String[] args) {
-		 ApplicationContext cxt =  SpringApplication.run(FirstSpringApplication.class, args);
+		SpringApplication.run(FirstSpringApplication.class, args);
+//		 ApplicationContext cxt =  SpringApplication.run(FirstSpringApplication.class, args);
 	
-	      MyController cont = cxt.getBean(MyController.class);
-	      
-	      System.out.println("in the main method");
-	      
-	      System.out.println(cont.getMSG());
+//	      MyController cont = cxt.getBean(MyController.class);
+//	      
+//	      System.out.println("in the main method");
+//	      
+//	      System.out.println(cont.getMSG());
 	
 	}
 
