@@ -1,7 +1,11 @@
 package com.example.firstSpring.controller;
 
+import org.springframework.stereotype.Controller;
+
 import com.example.firstSpring.service.GreetingIMPL;
 
+
+@Controller
 public class ConstructorBasedDependencyInjection {
    private final GreetingIMPL greetingservice;
 

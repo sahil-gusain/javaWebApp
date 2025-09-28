@@ -1,9 +1,14 @@
 package com.example.firstSpring.controller;
 
-import com.example.firstSpring.service.GreetingIMPL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+import com.example.firstSpring.service.GreetingIMPL;
+@Controller
 public class PropertyInjectedController {
-   GreetingIMPL greetingservice;
+   
+	@Autowired
+	GreetingIMPL greetingservice;
    
    public String sayHello() {
 	   
