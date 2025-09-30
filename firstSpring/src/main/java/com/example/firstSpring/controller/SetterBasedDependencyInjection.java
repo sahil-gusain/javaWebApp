@@ -1,6 +1,7 @@
 package com.example.firstSpring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import com.example.firstSpring.service.Greeting;
@@ -11,6 +12,7 @@ public class SetterBasedDependencyInjection {
      private Greeting greetingservice;
     
      @Autowired
+     @Qualifier("SetterBased")
 	public void setGreetingservice(Greeting greetingservice) {
 		this.greetingservice = greetingservice;
 	}

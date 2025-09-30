@@ -1,6 +1,7 @@
 package com.example.firstSpring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import com.example.firstSpring.service.Greeting;
@@ -9,6 +10,7 @@ import com.example.firstSpring.service.GreetingIMPL;
 public class PropertyInjectedController {
    
 	@Autowired
+	@Qualifier("propertybased")
 	Greeting greetingservice;
    
    public String sayHello() {
