@@ -20,4 +20,5 @@ The throw keyword in Java is used to explicitly throw an exception. The exceptio
 Problem with setter based di is that whenever object is created service initiation is not done at that moment whereas, we have to set it. If we don't do that we get null pointer error
 
 # Annotation
-@primary:It is used to designate a preferred bean when multiple beans of same type are available for autowiring. 
+@primary:It is used to designate a preferred bean when multiple beans of same type are available for autowiring.
+@Qualifiers : It is used to resolve ambiguity when multiple types of same bean are present in the Spring Container. 
