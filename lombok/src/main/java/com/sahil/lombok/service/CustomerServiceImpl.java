@@ -1,0 +1,57 @@
+package com.sahil.lombok.service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import com.sahil.lombok.model.Beer;
+import com.sahil.lombok.model.Customer;
+
+public class CustomerServiceImpl implements CustomerService {
+	private Map<UUID,Customer> customerMap;
+	
+	public CustomerServiceImpl() {
+		this.customerMap =new HashMap<UUID, Customer>();
+		
+		Customer cust1= Customer.builder()
+				.custName("Sahil")
+				.custId(UUID.randomUUID())
+				.version(1)
+				.lastModifiedDate(LocalDateTime.now())
+				.createdDate(LocalDateTime.now()).build();
+		
+		Customer cust2= Customer.builder()
+				.custName("Harsh")
+				.custId(UUID.randomUUID())
+				.version(1)
+				.lastModifiedDate(LocalDateTime.now())
+				.createdDate(LocalDateTime.now()).build();
+		
+		Customer cust3= Customer.builder()
+				.custName("Manish")
+				.custId(UUID.randomUUID())
+				.version(1)
+				.lastModifiedDate(LocalDateTime.now())
+				.createdDate(LocalDateTime.now()).build();
+		
+		customerMap.put(cust1.getCustId(), cust1);
+		customerMap.put(cust2.getCustId(), cust2);
+		customerMap.put(cust3.getCustId(), cust3);
+	}
+
+	@Override
+		public List<Customer> custList() {
+			// TODO Auto-generated method stub
+			return new ArrayList<>(customerMap.values());
+		}
+	
+	@Override
+	public Customer getCustomerById(UUID beerid) {
+		// TODO Auto-generated method stub
+		return customerMap.get(beerid);
+	}
+
+}
