@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import com.sahil.lombok.model.Beer;
 import com.sahil.lombok.model.Customer;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
 	private Map<UUID,Customer> customerMap;
 	
@@ -49,9 +52,9 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	
 	@Override
-	public Customer getCustomerById(UUID beerid) {
+	public Customer getCustomerById(UUID customerId) {
 		// TODO Auto-generated method stub
-		return customerMap.get(beerid);
+		return customerMap.get(customerId);
 	}
 
 }
