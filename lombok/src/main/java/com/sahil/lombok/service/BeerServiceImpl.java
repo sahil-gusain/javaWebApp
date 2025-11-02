@@ -83,6 +83,26 @@ public class BeerServiceImpl implements BeerService {
 		
 		 return new ArrayList<>(beerMap.values());
 	}
+
+	@Override
+	public Beer saveNewBeer(Beer beer) {
+		// TODO Auto-generated method stub
+		Beer newBeer = Beer.builder()
+						.beerid(UUID.randomUUID())
+						.version(3)
+		                .beerName(beer.getBeerName())
+		                .beerStyle(beer.getBeerStyle())
+		                .upc(beer.getUpc())
+		                .price(beer.getPrice())
+		                .quantityOnHand(beer.getQuantityOnHand())
+		                .createdDate(LocalDateTime.now())
+		                .updateDate(LocalDateTime.now())
+		                .build();
+		
+		beerMap.put(beer.getBeerid(), newBeer);
+		
+		return newBeer;
+	}
 }
 
 //path:/c/users/sahil/new-eclipse-workspace/lombok 
