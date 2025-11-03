@@ -34,7 +34,7 @@ public class BeerController {
 		
 		org.springframework.http.HttpHeaders header = new org.springframework.http.HttpHeaders();
 		
-		header.add("Locatin", "/api/v1/beer" + savedBeer.getBeerid());
+		header.add("Location", "/api/v1/beer/" + savedBeer.getBeerid());
 		
 		return new ResponseEntity<Void>(header   ,HttpStatus.CREATED);
 	}

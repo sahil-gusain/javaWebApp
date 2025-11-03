@@ -10,4 +10,6 @@ public interface CustomerService {
 	List<Customer> custList();
 
     Customer getCustomerById(UUID beerid);
+
+	Customer createNewCustomer(Customer newCust);
 }

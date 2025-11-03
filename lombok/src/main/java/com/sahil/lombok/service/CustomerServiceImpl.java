@@ -57,4 +57,19 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerMap.get(customerId);
 	}
 
+	@Override
+	public Customer createNewCustomer(Customer newCust) {
+		// TODO Auto-generated method stub
+		Customer tempCust = Customer.builder()
+				.custName(newCust.getCustName()) 	
+				.custId(UUID.randomUUID())
+				.version(1)
+				.lastModifiedDate(LocalDateTime.now())
+				.createdDate(LocalDateTime.now()).build();
+		
+		customerMap.put(tempCust.getCustId(), tempCust);
+		
+		return tempCust;
+	}
+
 }
