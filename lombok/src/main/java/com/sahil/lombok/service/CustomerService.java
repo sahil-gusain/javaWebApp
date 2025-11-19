@@ -12,4 +12,11 @@ public interface CustomerService {
     Customer getCustomerById(UUID beerid);
 
 	Customer createNewCustomer(Customer newCust);
+
+
+	void deleteById(UUID customerId);
+
+	void updateCustomerPatchById(UUID customerId, Customer customer);
+
+	void updateCustomerById(UUID customerId, Customer customer);
 }

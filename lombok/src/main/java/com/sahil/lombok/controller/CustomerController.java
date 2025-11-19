@@ -4,13 +4,17 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sahil.lombok.model.Beer;
 import com.sahil.lombok.model.Customer;
 import com.sahil.lombok.service.CustomerService;
 
@@ -25,6 +29,36 @@ import java.util.List;
 @RequestMapping("api/v1/customers")
 public class CustomerController {
 	private CustomerService customerservice;
+	
+	@PatchMapping("{customerId}")
+	public ResponseEntity<Void> updateBeerById(@PathVariable("customerId") UUID customerId,@RequestBody Customer customer){
+		
+		customerservice.updateCustomerPatchById(customerId, customer);
+		
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	@DeleteMapping("{customerId}")
+	public ResponseEntity<Void> deleteById(@PathVariable("customerId")UUID customerId){
+		
+		customerservice.deleteById(customerId);
+		
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	
+	
+	@PutMapping("{customerId}")
+	public ResponseEntity<Void> updateById(@PathVariable("customerId")UUID customerId,@RequestBody Customer customer){
+		
+		customerservice.updateCustomerById(customerId,customer);
+		
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<Void> createCustomer(@RequestBody   Customer newCust){

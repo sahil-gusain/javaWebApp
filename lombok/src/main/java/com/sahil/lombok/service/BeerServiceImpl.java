@@ -103,6 +103,53 @@ public class BeerServiceImpl implements BeerService {
 		
 		return newBeer;
 	}
+
+	@Override
+	public void updateBeerById(UUID beerId, Beer beer) {
+		// TODO Auto-generated method stub
+		Beer existing = beerMap.get(beerId);
+		
+		existing.setBeerName(beer.getBeerName());
+		existing.setPrice(beer.getPrice());
+		existing.setQuantityOnHand(beer.getQuantityOnHand());
+		existing.setUpc(beer.getUpc());
+		
+		beerMap.put(beerId, existing);
+		
+		     
+	}
+
+	@Override
+	public void deleteById(UUID beerId) {
+		// TODO Auto-generated method stub
+		beerMap.remove(beerId);
+	}
+
+	@Override
+	public void updateBeerPatchById(UUID beerId, Beer beer) {
+		// TODO Auto-generated method stub
+		Beer existing = beerMap.get(beerId);
+		
+		if(beer.getBeerName() != null) {
+			existing.setBeerName(beer.getBeerName());
+		}
+		
+        if (beer.getBeerStyle() != null) {
+            existing.setBeerStyle(beer.getBeerStyle());
+        }
+
+        if (beer.getPrice() != null) {
+            existing.setPrice(beer.getPrice());
+        }
+
+        if (beer.getQuantityOnHand() != null){
+            existing.setQuantityOnHand(beer.getQuantityOnHand());
+        }
+
+        if (beer.getUpc() != null) {
+            existing.setUpc(beer.getUpc());
+        }
+	}
 }
 
 //path:/c/users/sahil/new-eclipse-workspace/lombok 

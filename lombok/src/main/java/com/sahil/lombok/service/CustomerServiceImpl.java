@@ -72,4 +72,34 @@ public class CustomerServiceImpl implements CustomerService {
 		return tempCust;
 	}
 
+	@Override
+	public void deleteById(UUID customerId) {
+		// TODO Auto-generated method stub
+		customerMap.remove(customerId);
+	}
+
+	@Override
+	public void updateCustomerPatchById(UUID customerId, Customer customer) {
+		// TODO Auto-generated method stub
+		Customer existing = customerMap.get(customerId);
+		
+		if(customer.getCustName() != null) {
+			existing.setCustName(customer.getCustName());
+		}
+		
+  
+
+	}
+
+	@Override
+	public void updateCustomerById(UUID customerId, Customer customer) {
+		// TODO Auto-generated method stub
+		Customer existing = customerMap.get(customerId);
+		
+		
+		
+		customerMap.put(customerId, existing);
+		
+	}
+
 }
