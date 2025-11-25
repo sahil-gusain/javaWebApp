@@ -17,6 +17,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.hamcrest.core.Is.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+
 
 
 import com.sahil.lombok.model.Beer;
@@ -35,18 +39,37 @@ class BeerControllerTest {
      BeerServiceImpl beerImp = new BeerServiceImpl();
      
      @Test
+     void testListBeer() throws Exception {
+    	 
+    	 	given(beerService.beerList()).willReturn(beerImp.beerList());
+    	 	
+    	 	mockMvc.perform(get("/api/v1/beer")
+    	 			.accept(MediaType.APPLICATION_JSON))
+    	 			.andExpectAll(status().isOk())
+    	 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	 			.andExpect(jsonPath("$.length()", is(3)));
+    	 
+     }
+     
+     
+     
+     
+     
+     @Test
      void getBeerById() throws Exception {
     	 Beer testBeer = beerImp.beerList().get(0);
     	 
-    	 given(beerService.getBeerById(any(UUID.class))).willReturn(testBeer);
+    	 given(beerService.getBeerById(testBeer.getBeerid())).willReturn(testBeer);
     	 
     	 
-    	 mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID())
+    	 mockMvc.perform(get("/api/v1/beer/" + testBeer.getBeerid())
     			 .accept(MediaType.APPLICATION_JSON)) 
     	 		 .andExpect(status().isOk())
-    	 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    	 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	 		.andExpect(jsonPath("$.beerid", is(testBeer.getBeerid().toString())))
+    	 		 .andExpect(jsonPath("$.beerName", is(testBeer.getBeerName())));
 
-     
+    	 
      }
      
 
