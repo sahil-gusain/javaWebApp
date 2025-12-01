@@ -51,9 +51,7 @@ class BeerControllerTest {
     	 
      }
      
-     
-     
-     
+  
      
      @Test
      void getBeerById() throws Exception {
@@ -68,8 +66,7 @@ class BeerControllerTest {
     	 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
     	 		.andExpect(jsonPath("$.beerid", is(testBeer.getBeerid().toString())))
     	 		 .andExpect(jsonPath("$.beerName", is(testBeer.getBeerName())));
-
-    	 
+   	 
      }
      
 
