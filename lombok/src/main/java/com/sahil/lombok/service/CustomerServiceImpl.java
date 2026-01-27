@@ -9,31 +9,31 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.sahil.lombok.model.Beer;
-import com.sahil.lombok.model.Customer;
+import com.sahil.lombok.model.BeerDTO;
+import com.sahil.lombok.model.CustomerDTO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-	private Map<UUID,Customer> customerMap;
+	private Map<UUID,CustomerDTO> customerMap;
 	
 	public CustomerServiceImpl() {
-		this.customerMap =new HashMap<UUID, Customer>();
+		this.customerMap =new HashMap<UUID, CustomerDTO>();
 		
-		Customer cust1= Customer.builder()
+		CustomerDTO cust1= CustomerDTO.builder()
 				.custName("Sahil")
 				.custId(UUID.randomUUID())
 				.version(1)
 				.lastModifiedDate(LocalDateTime.now())
 				.createdDate(LocalDateTime.now()).build();
 		
-		Customer cust2= Customer.builder()
+		CustomerDTO cust2= CustomerDTO.builder()
 				.custName("Harsh")
 				.custId(UUID.randomUUID())
 				.version(1)
 				.lastModifiedDate(LocalDateTime.now())
 				.createdDate(LocalDateTime.now()).build();
 		
-		Customer cust3= Customer.builder()
+		CustomerDTO cust3= CustomerDTO.builder()
 				.custName("Manish")
 				.custId(UUID.randomUUID())
 				.version(1)
@@ -46,21 +46,21 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-		public List<Customer> custList() {
+		public List<CustomerDTO> custList() {
 			// TODO Auto-generated method stub
 			return new ArrayList<>(customerMap.values());
 		}
 	
 	@Override
-	public Customer getCustomerById(UUID customerId) {
+	public CustomerDTO getCustomerById(UUID customerId) {
 		// TODO Auto-generated method stub
 		return customerMap.get(customerId);
 	}
 
 	@Override
-	public Customer createNewCustomer(Customer newCust) {
+	public CustomerDTO createNewCustomer(CustomerDTO newCust) {
 		// TODO Auto-generated method stub
-		Customer tempCust = Customer.builder()
+		CustomerDTO tempCust = CustomerDTO.builder()
 				.custName(newCust.getCustName()) 	
 				.custId(UUID.randomUUID())
 				.version(1)
@@ -79,9 +79,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void updateCustomerPatchById(UUID customerId, Customer customer) {
+	public void updateCustomerPatchById(UUID customerId, CustomerDTO customer) {
 		// TODO Auto-generated method stub
-		Customer existing = customerMap.get(customerId);
+		CustomerDTO existing = customerMap.get(customerId);
 		
 		if(customer.getCustName() != null) {
 			existing.setCustName(customer.getCustName());
@@ -92,9 +92,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void updateCustomerById(UUID customerId, Customer customer) {
+	public void updateCustomerById(UUID customerId, CustomerDTO customer) {
 		// TODO Auto-generated method stub
-		Customer existing = customerMap.get(customerId);
+		CustomerDTO existing = customerMap.get(customerId);
 		
 		
 		

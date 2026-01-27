@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sahil.lombok.model.Beer;
-import com.sahil.lombok.model.Customer;
+import com.sahil.lombok.model.BeerDTO;
+import com.sahil.lombok.model.CustomerDTO;
 import com.sahil.lombok.service.CustomerService;
 
 import lombok.AllArgsConstructor;
@@ -26,19 +26,21 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/customers")
 public class CustomerController {
 	private CustomerService customerservice;
 	
-	@PatchMapping("{customerId}")
-	public ResponseEntity<Void> updateBeerById(@PathVariable("customerId") UUID customerId,@RequestBody Customer customer){
+    public static final String CUSTOMER_PATH = "/api/v1/customers";
+    public static final String CUSTOMER_PATH_ID = CUSTOMER_PATH + "/{customerId}";
+	
+	@PatchMapping(CUSTOMER_PATH_ID)
+	public ResponseEntity<Void> updateBeerById(@PathVariable("customerId") UUID customerId,@RequestBody CustomerDTO customer){
 		
 		customerservice.updateCustomerPatchById(customerId, customer);
 		
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@DeleteMapping("{customerId}")
+	@DeleteMapping(CUSTOMER_PATH_ID)
 	public ResponseEntity<Void> deleteById(@PathVariable("customerId")UUID customerId){
 		
 		customerservice.deleteById(customerId);
@@ -48,8 +50,8 @@ public class CustomerController {
 	
 	
 	
-	@PutMapping("{customerId}")
-	public ResponseEntity<Void> updateById(@PathVariable("customerId")UUID customerId,@RequestBody Customer customer){
+	@PutMapping(CUSTOMER_PATH_ID)
+	public ResponseEntity<Void> updateById(@PathVariable("customerId")UUID customerId,@RequestBody CustomerDTO customer){
 		
 		customerservice.updateCustomerById(customerId,customer);
 		
@@ -60,9 +62,9 @@ public class CustomerController {
 	
 	
 	
-	@PostMapping
-	public ResponseEntity<Void> createCustomer(@RequestBody   Customer newCust){
-		Customer savedCustomer = customerservice.createNewCustomer(newCust);
+	@PostMapping(CUSTOMER_PATH)
+	public ResponseEntity<Void> createCustomer(@RequestBody   CustomerDTO newCust){
+		CustomerDTO savedCustomer = customerservice.createNewCustomer(newCust);
 		
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		
@@ -71,13 +73,14 @@ public class CustomerController {
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Customer> custList(){
+	 @RequestMapping(value=CUSTOMER_PATH,method = RequestMethod.GET)
+	//@RequestMapping(method = RequestMethod.GET)
+	public List<CustomerDTO> custList(){
 		return customerservice.custList();
 	}
 	
-	 @RequestMapping(value = "{customerId}",method = RequestMethod.GET)
-	public Customer getBeerById(@PathVariable("customerId") UUID customerId) {
+	 @RequestMapping(value = CUSTOMER_PATH_ID,method = RequestMethod.GET)
+	public CustomerDTO getBeerById(@PathVariable("customerId") UUID customerId) {
 		return customerservice.getCustomerById(customerId);
 	}
 

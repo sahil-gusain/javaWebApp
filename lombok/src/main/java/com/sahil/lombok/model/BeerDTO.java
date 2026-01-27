@@ -2,6 +2,7 @@ package com.sahil.lombok.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,7 +11,8 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class Beer {
+@Jacksonized
+public class BeerDTO {
     private UUID beerid;
     private Integer version;
     private String beerName;
