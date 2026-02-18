@@ -6,7 +6,7 @@ import com.sahil.Jpa.entities.Customer;
 import com.sahil.Jpa.model.CustomerDTO;
 
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 	Customer customerDtoToCustomer(CustomerDTO customer);
 	

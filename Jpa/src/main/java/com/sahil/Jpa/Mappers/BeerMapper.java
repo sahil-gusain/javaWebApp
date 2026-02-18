@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import com.sahil.Jpa.entities.Beer;
 import com.sahil.Jpa.model.BeerDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface BeerMapper {
 
     Beer beerDtoToBeer(BeerDTO dto);
