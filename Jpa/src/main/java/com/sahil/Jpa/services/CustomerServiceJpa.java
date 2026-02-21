@@ -3,11 +3,13 @@ package com.sahil.Jpa.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sahil.Jpa.Mappers.CustomerMapper;
+import com.sahil.Jpa.Repository.CustomerRepository;
 import com.sahil.Jpa.model.CustomerDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -18,19 +20,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomerServiceJpa implements CustomerService {
 	
-	private final CustomerService customerService;
+	private final CustomerRepository customerRepository;
 	private final CustomerMapper customerMapper;
 	
 	@Override
-	public Optional<CustomerDTO> getCustomerById(UUID uuid) {
+	public Optional<CustomerDTO> getCustomerById(UUID id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return Optional.ofNullable(customerMapper.customerToCustomerDto(customerRepository.findById(id)
+                .orElse(null))); 
 	}
 
 	@Override
 	public List<CustomerDTO> getAllCustomers() {
 		// TODO Auto-generated method stub
-		return null;
+		return customerRepository.findAll()
+				.stream()
+				.map(customerMapper::customerToCustomerDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override

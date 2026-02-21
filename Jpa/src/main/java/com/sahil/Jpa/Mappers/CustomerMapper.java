@@ -10,5 +10,5 @@ import com.sahil.Jpa.model.CustomerDTO;
 public interface CustomerMapper {
 	Customer customerDtoToCustomer(CustomerDTO customer);
 	
-	CustomerDTO customerDtoToCustomer(Customer customer);
+	CustomerDTO customerToCustomerDto(Customer customer);
 }
