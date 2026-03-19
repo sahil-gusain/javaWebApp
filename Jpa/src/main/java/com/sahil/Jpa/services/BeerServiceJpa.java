@@ -3,6 +3,7 @@ package com.sahil.Jpa.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -44,19 +45,34 @@ public class BeerServiceJpa implements BeerService {
 	@Override
 	public BeerDTO saveNewBeer(BeerDTO beer) {
 		// TODO Auto-generated method stub
-		return null;
+		return  beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
 	}
 
 	@Override
-	public void updateBeerById(UUID beerId, BeerDTO beer) {
-		// TODO Auto-generated method stub
+    public Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beer) {
+        AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
 
-	}
+        beerRepository.findById(beerId).ifPresentOrElse(foundBeer -> {
+            foundBeer.setBeerName(beer.getBeerName());
+            foundBeer.setBeerStyle(beer.getBeerStyle());
+            foundBeer.setUpc(beer.getUpc());
+            foundBeer.setPrice(beer.getPrice());
+            atomicReference.set(Optional.of(beerMapper
+                    .beerToBeerDto(beerRepository.save(foundBeer))));
+        }, () -> {
+            atomicReference.set(Optional.empty());
+        });
+
+        return atomicReference.get();
+    }
 
 	@Override
-	public void deleteById(UUID beerId) {
-		// TODO Auto-generated method stub
-
+	public boolean deleteById(UUID beerId) {
+		if(!beerRepository.existsById(beerId)) return false;
+		
+		beerRepository.deleteById(beerId);
+		
+		return true;
 	}
 
 	@Override

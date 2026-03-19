@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sahil.Jpa.model.BeerDTO;
+import com.sahil.Jpa.model.BeerDTO.BeerDTOBuilder;
 import com.sahil.Jpa.services.BeerService;
 
 import java.util.List;
@@ -33,16 +34,22 @@ public class BeerController {
 
     @DeleteMapping(BEER_PATH_ID)
     public ResponseEntity deleteById(@PathVariable("beerId") UUID beerId){
-
-        beerService.deleteById(beerId);
-
+    		
+    		if(!beerService.deleteById(beerId)) {
+    			throw new NotFoundException();
+    		}
+    		
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(BEER_PATH_ID)
-    public ResponseEntity updateById(@PathVariable("beerId")UUID beerId, @RequestBody BeerDTO beer){
+    public ResponseEntity updateById(@PathVariable("beerId")UUID beerId, @RequestBody BeerDTO beerDTO){
 
-        beerService.updateBeerById(beerId, beer);
+        if(beerService.updateBeerById(beerId, beerDTO).isEmpty()) {
+        			throw new NotFoundException();
+        }
+    	
+    		
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
